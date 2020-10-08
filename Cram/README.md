@@ -21,7 +21,7 @@ npm start
 ### Prepping Your React App:
 1. Run `npm run build` in your React app root folder. 
     * This will build the static files for your React app. 
-    * The `postbuild` script from your `package.json` will _automatically_ move them into the `/static` directory in your flask files.
+    * In explorer, copy client/build files, replace contents of starter_app/app/static
 
 
 ### Prepping your Flask App:
@@ -33,7 +33,13 @@ npm start
 
 1. Login to heroku: `$ heroku login`
 2. Login to the heroku container registry: `$ heroku container:login`
-3. CD into `starter_app` and push your `Dockerfile` to heroku (this will build the Flask Dockerfile, and push): `$ heroku container:push web -a {NAME_OF_HEROKU_APP}`
-5. Release your docker container to heroku: `$ heroku container:release web -a {NAME_OF_HEROKU_APP}`
-6. Set up your database: `heroku run -a {NAME_OF_HEROKU_APP} {your_migration_script_here}`
+3. CD into `starter_app`
+3. Remove Previous Image `docker image rm cram_build`
+4. Create Image to Push to Heroku `docker build -t cram_build .`
+5. Push Image to Heroku Docker Repo `docker tag cram_build registry.heroku.com/cram-flashcards/web`
+6. Run Container from Heroku Docker Repo `docker push registry.heroku.com/cram-flashcards/web`
+7. Release your docker container to heroku: `heroku container:push web -a cram-flashcards`
+8. Seed your database: `heroku run -a cram-flashcards python -m database`
 7. Profit.
+
+
