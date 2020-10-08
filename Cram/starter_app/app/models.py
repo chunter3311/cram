@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now, nullable=False)
+    decks = db.relationship('Deck', back_populates='user')
 
 
     @property
@@ -33,4 +34,27 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email
+        }
+
+
+class Deck(db.Model):
+    __tablename__ = 'decks'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(25), nullable=False)
+    isMastered = db.Column(db.Boolean, nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now, nullable=False)
+    user = db.relationship('User', back_populates="decks")
+    __table_args__ = (db.UniqueConstraint('title', 'userId'), )
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "isMastered": self.isMastered,
+            "userId": self.userId,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
         }

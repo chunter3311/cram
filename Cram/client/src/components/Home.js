@@ -3,16 +3,26 @@ import MainContent from './MainContent';
 import Navbar from './Navbar';
 import { connect, useDispatch } from 'react-redux';
 import { setUserInfo } from '../store/users';
+import { setSelectedDeck } from '../store/session';
+import { setUserDecks } from '../store/decks';
 
-function Home({ userId }) {
+function Home({ userId, selectedDeckId }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        const getDecks = async () => {
+            await dispatch(setUserDecks(userId));
+        }
+        getDecks();
+        dispatch(setSelectedDeck(selectedDeckId || 1));
+
         const getUserInfo = async () => {
             await dispatch(setUserInfo(userId));
         }
         getUserInfo();
-    }, [dispatch, userId]);
+
+        // dispatch(setSelectedDeck(selectedDeckId || defaultDeckId));
+    }, [dispatch, userId, selectedDeckId]);
 
     return (
         <>
@@ -26,7 +36,10 @@ function Home({ userId }) {
 
 const mapStateToProps = (state) => {
     return {
-        userId: state.session.user_id
+        userId: state.session.user_id,
+        selectedDeckId: state.session.selectedDeckId,
+        decks: state.entities.decks,
+        defaultDeckId: state.session.defaultDeckId
     }
 };
 

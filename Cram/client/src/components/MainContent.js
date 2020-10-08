@@ -1,10 +1,12 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
+import Decks from './Decks';
+
 
 function MainContent({ match }) {
     return (
         <div style={{width: "100%"}}>
-            <h1>Main Content</h1>
+            <Route path={match.url + "decks"} component={Decks} />
         </div>
     );
 }
