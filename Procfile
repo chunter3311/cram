@@ -1,1 +1,1 @@
-web: gunicorn cram.wsgi --log-file -
+web: gunicorn app:app
