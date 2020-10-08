@@ -21,7 +21,7 @@ npm start
 ### Prepping Your React App:
 1. Run `npm run build` in your React app root folder. 
     * This will build the static files for your React app. 
-    * The `postbuild` script from your `package.json` will _automatically_ move them into the `/static` directory in your flask files.
+    * In explorer, copy client/build files, replace contents of starter_app/app/static
 
 
 ### Prepping your Flask App:
