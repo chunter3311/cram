@@ -8,6 +8,7 @@ from flask_migrate import Migrate
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.session import session
+from .api.flashcards import flashcards
 from .api.decks import decks
 
 from .config import Config
@@ -17,18 +18,17 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(session, url_prefix='/api/session')
+app.register_blueprint(flashcards, url_prefix='/api/flashcards')
 app.register_blueprint(decks, url_prefix='/api/decks')
 db.init_app(app)
 login_manager.init_app(app)
 migrate = Migrate(app, db)
 
+## Application Security
 CORS(app)
-
-
 @app.after_request
 def inject_csrf_token(response):
-    response.set_cookie(
-        'csrf_token',
+    response.set_cookie('csrf_token',
         generate_csrf(),
         secure=True if os.environ.get('FLASK_ENV') else False,
         samesite='Strict' if os.environ.get('FLASK_ENV') else None,

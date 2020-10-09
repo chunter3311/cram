@@ -15,7 +15,9 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now, nullable=False)
+    flashcards = db.relationship('Flashcard', back_populates='user')
     decks = db.relationship('Deck', back_populates='user')
+    
 
 
     @property
@@ -34,6 +36,35 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email
+        }
+
+
+class Flashcard(db.Model):
+    __tablename__ = 'flashcards'
+
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.String(255), default='Untitled', nullable=False)
+    answer = db.Column(db.String(255), default='Untitled', nullable=False)
+    confidence = db.Column(db.Integer, default=0, nullable=False)
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    deckId = db.Column(db.Integer, db.ForeignKey('decks.id'))
+    isTrash = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.now, nullable=False)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now, nullable=False)
+    user = db.relationship('User', back_populates='flashcards')
+    deck = db.relationship('Deck')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "question": self.question,
+            "answer": self.answer,
+            "confidence": self.confidence,
+            "userId": self.userId,
+            "deckId": self.deckId,
+            "isTrash": self.isTrash,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
         }
 
 
