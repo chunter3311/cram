@@ -8,7 +8,7 @@ import { setSelectedDeck } from '../store/session';
 
 function Navbar({ history }) {
     const dispatch = useDispatch();
-    const decks = useSelector(state => state.entities.decks);
+    // const decks = useSelector(state => state.entities.decks);
 
     const handleLogout = async (e) => {
         e.preventDefault();
@@ -19,26 +19,26 @@ function Navbar({ history }) {
         return;
     }
 
-    const handleSelect = (e) => {
-        e.preventDefault();
-        console.log(e.target.value)
-        dispatch(setSelectedDeck(Number(e.target.value)))
-        history.replace('/decks');
-        return;
-    }
+    // const handleSelect = (e) => {
+    //     e.preventDefault();
+    //     console.log(e.target.value)
+    //     dispatch(setSelectedDeck(Number(e.target.value)))
+    //     history.replace('/notes');
+    //     return;
+    // }
 
     const users = useSelector(state => state.entities.users);
     const getUsername = Object.values(users).map(user => {
         return user.username;
     })
 
-    const select_decks = Object.values(decks).map(ele => {
-        return (
-            <li key={ele.id}>
-                <button value={ele.id} onClick={handleSelect}>{ele.title}</button>
-            </li>
-        )
-    });
+    // const select_decks = Object.values(decks).map(ele => {
+    //     return (
+    //         <li key={ele.id}>
+    //             <button value={ele.id} onClick={handleSelect}>{ele.title}</button>
+    //         </li>
+    //     )
+    // });
 
     return (
         <nav className={styles.sidebar_nav}>
@@ -53,7 +53,7 @@ function Navbar({ history }) {
             <hr />
             <ul className={styles.navlinks}>
                 <li><NavLink to="/decks" activeclass="active">My Decks</NavLink></li>
-                {select_decks}
+                {/* {select_decks} */}
             </ul>
             <ul className={styles.extra_navlinks}>
                 <li><NavLink to="/users" activeclass="active">Users</NavLink></li>

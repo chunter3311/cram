@@ -4,7 +4,7 @@ import { setSelectedDeck } from './session';
 export const SET_DECKS = "decks/SET_DECKS";
 export const ADD_DECK = "decks/ADD_DECK";
 export const EDIT_DECK = "decks/EDIT_DECK";
-// export const SET_DEFAULT_DECK = "decks/SET_DEFAULT_DECK";
+export const SET_DEFAULT_DECK = "decks/SET_DEFAULT_DECK";
 export const LOGOUT_USER = 'session/LOGOUT_USER';
 
 
@@ -30,12 +30,12 @@ const editDeck = (deck) => {
     }
 }
 
-// export const setDefaultDeck = (defaultDeckId) => {
-//     return {
-//         type: SET_DEFAULT_DECK,
-//         defaultDeckId
-//     }
-// }
+export const setDefaultDeck = (defaultDeckId) => {
+    return {
+        type: SET_DEFAULT_DECK,
+        defaultDeckId
+    }
+}
 
 
 export const updateUserDeck = id => {
@@ -60,24 +60,6 @@ export const updateUserDeck = id => {
 }
 
 
-// export const setUserDecks = id => {
-//     const path = `/api/users/${id}/decks`;
-//     return async dispatch => {
-//         const res = await fetch(path);
-//         res.data = await res.json();
-//         console.log("reducer", res);
-//         if (res.ok) {
-//             dispatch(setDecks(res.data));
-//             Object.values(res.data).forEach(ele => {
-//                 if (ele.isMastered) {
-//                     dispatch(setDefaultDeck(ele.id))
-//                     dispatch(setSelectedDeck(ele.id))
-//                 }
-//             })
-//         }
-//         return res;
-//     }
-// }
 export const setUserDecks = id => {
     const path = `/api/users/${id}/decks`;
     return async dispatch => {
@@ -87,7 +69,10 @@ export const setUserDecks = id => {
         if (res.ok) {
             dispatch(setDecks(res.data));
             Object.values(res.data).forEach(ele => {
-                dispatch(setSelectedDeck(ele.id))
+                if (ele.isMastered) {
+                    dispatch(setDefaultDeck(ele.id))
+                    dispatch(setSelectedDeck(ele.id))
+                }
             })
         }
         return res;
@@ -96,6 +81,7 @@ export const setUserDecks = id => {
 
 export const addUserDecks = (title, isMastered, userId) => {
     const csrfToken = Cookies.get('XSRF-TOKEN');
+    // const path = `api/users/${userId}/decks`;
     const path = `/api/decks/`;
     return async dispatch => {
         const res = await fetch(path, {

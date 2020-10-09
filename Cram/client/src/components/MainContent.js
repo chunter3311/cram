@@ -7,6 +7,7 @@ function MainContent({ match }) {
     return (
         <div style={{width: "100%"}}>
             <Route path={match.url + "decks"} component={Decks} />
+            
         </div>
     );
 }
