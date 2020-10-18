@@ -2,3 +2,7 @@
 body {
     /* background-image: none; */
 }
+
+* {
+    font-family: cursive;
+}

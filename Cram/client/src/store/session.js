@@ -4,6 +4,7 @@ const SET_DEFAULT_DECK = 'decks/SET_DEFAULT_DECK'
 const SET_USER = 'session/SET_USER';
 const LOGOUT_USER = 'session/LOGOUT_USER';
 const SET_SELECTED_DECK = 'session/SET_SELECTED_DECK';
+const SET_SELECTED_FLASHCARD = 'session/SET_SELECTED_FLASHCARD';
 const SET_FLASHCARD_LIST = "session/SET_FLASHCARD_LIST";
 const SET_ACTIVE_FLASHCARD = "session/SET_ACTIVE_FLASHCARD";
 
@@ -11,6 +12,13 @@ export const setSelectedDeck = (deckId) => {
     return {
         type: SET_SELECTED_DECK,
         deckId
+    };
+}
+
+export const setSelectedFlashcard = (flashcardId) => {
+    return {
+        type: SET_SELECTED_FLASHCARD,
+        flashcardId
     };
 }
 
@@ -33,9 +41,6 @@ export const logoutUser = () => {
         type: LOGOUT_USER
     }
 }
-
-
-
 
 
 export const login = (email_or_username, password) => {
@@ -80,6 +85,7 @@ export const logout = () => {
 const initialSessionState = {
     user_id: null,
     selectedDeckId: null,
+    selectedFlashcardId: null,
     defaultDeckId: null,
     flashcardList: null,
     activeFlashcard: null
@@ -94,10 +100,11 @@ export default function sessionReducer(state = initialSessionState, action) {
             return newState;
         case LOGOUT_USER:
             return {};
-            // newState.user_id = null;
-            // return newState;
         case SET_SELECTED_DECK:
             newState.selectedDeckId = action.deckId;
+            return newState;
+        case SET_SELECTED_FLASHCARD:
+            newState.selectedFlashcardId = action.flashcardId;
             return newState;
         case SET_DEFAULT_DECK:
             newState.defaultDeckId = action.defaultDeckId;

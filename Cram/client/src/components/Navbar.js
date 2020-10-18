@@ -4,6 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { logout } from '../store/session';
 import styles from '../styles/navbar.module.css';
 import { setSelectedDeck } from '../store/session';
+import NewFlashcardButton from './NewFlashcardButton';
 
 
 function Navbar({ history }) {
@@ -52,12 +53,13 @@ function Navbar({ history }) {
             </div>
             <hr />
             <ul className={styles.navlinks}>
-                <li><NavLink to="/decks" activeclass="active">My Decks</NavLink></li>
+                <li><NavLink to="/decks" activeclass="active">Decks</NavLink></li>
+                <li><NavLink to="/flashcards" activeclass="active">Flashcards</NavLink></li>
                 {/* {select_decks} */}
             </ul>
-            <ul className={styles.extra_navlinks}>
+            {/* <ul className={styles.extra_navlinks}>
                 <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-            </ul>
+            </ul> */}
         </nav>
     );
 }
