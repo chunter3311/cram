@@ -58,15 +58,16 @@ const LoginForm = ({ history }) => {
                     <h1 className="header-title">
                         Cram
                     </h1>
-                    <div className="header-tagline">
+                    {/* <div className="header-tagline">
                         Optimize Your Study
-                    </div>
+                    </div> */}
                 </div>
                 <button onClick={demoUserClick} className="demo_button">Continue as Demo User</button>
-                <div className="divider-container">
+                {/* <div className="divider-container">
                     <div className="divider-text">or</div>
                     <div className="divider-line"></div>
-                </div>
+                </div> */}
+                <hr />
                 <div className="login_form_container">
 
                     <form method="" action="" onSubmit={handleSubmit}>
@@ -88,9 +89,9 @@ const LoginForm = ({ history }) => {
                     </form>
                 </div>
                 <div className="form-footer">
-                    <div className="footer-tagline">
+                    {/* <div className="footer-tagline">
                         Don't have an account?
-                    </div>
+                    </div> */}
                     <div className="footer-cta-wrapper">
                         <Link className="footer-cta" to='/signup'>Create account</Link>
                     </div>

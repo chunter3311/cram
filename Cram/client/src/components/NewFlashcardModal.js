@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
-import { addUserFlashcards } from '../store/flashcards';
+// import { addUserFlashcards } from '../store/flashcards';
 
 const NewFlashcardModal = ({ CreateFlashcardModal }) => {
     const [question, setQuestion] = useState("");
@@ -12,12 +12,12 @@ const NewFlashcardModal = ({ CreateFlashcardModal }) => {
 
     const handleClick = async (event) => {
         event.stopPropagation();
-        const res = await dispatch(addUserFlashcards(question, answer, confidence, deckId, userId));
+        // const res = await dispatch(addUserFlashcards(question, answer, confidence, deckId, userId));
 
-        if (res.ok) {
-            CreateFlashcardModal(event)
-            return;
-        }
+        // if (res.ok) {
+        //     CreateFlashcardModal(event)
+        //     return;
+        // }
 
     }
 
