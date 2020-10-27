@@ -43,9 +43,9 @@ class Flashcard(db.Model):
     __tablename__ = 'flashcards'
 
     id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String(255), default='Untitled', nullable=False)
-    answer = db.Column(db.String(255), default='Untitled', nullable=False)
-    confidence = db.Column(db.Integer, default=0, nullable=False)
+    question = db.Column(db.String(255), nullable=False)
+    answer = db.Column(db.String(255), nullable=False)
+    confidence = db.Column(db.Integer, nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     deckId = db.Column(db.Integer, db.ForeignKey('decks.id'))
     isTrash = db.Column(db.Boolean, default=False)

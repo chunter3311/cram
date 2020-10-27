@@ -1,5 +1,4 @@
 import Cookies from 'js-cookie';
-import { setActiveFlashcard } from './session';
 import { updateUserDeck } from './decks';
 
 const ADD_FLASHCARD = '/flashcards/ADD_FLASHCARD';
@@ -7,7 +6,7 @@ const SET_FLASHCARDS = '/flashcards/SET_FLASHCARDS';
 const UPDATE_FLASHCARD = "/flashcards/UPDATE_FLASHCARD";
 const LOGOUT_USER = 'session/LOGOUT_USER';
 
-export const setFlashcard = flashcard => {
+export const addFlashcard = flashcard => {
     return {
         type: ADD_FLASHCARD,
         flashcard
@@ -21,10 +20,34 @@ export const setFlashcards = flashcards => {
     }
 }
 
-export const updateFlashcardItem = flashcard => {
+export const updateFlashcard = flashcard => {
     return {
         type: UPDATE_FLASHCARD,
         flashcard
+    }
+}
+
+
+export const addUserFlashcard = (question, answer, confidence, userId, deckId) => {
+    const csrfToken = Cookies.get('XSRF-TOKEN');
+    const path = `/api/flashcards/`;
+    return async dispatch => {
+        const res = await fetch(path, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFTOKEN': csrfToken
+            },
+            body: JSON.stringify({ question, answer, confidence, userId, deckId })
+        });
+
+        res.data = await res.json();
+
+        if (res.ok) {
+            dispatch(addFlashcard(res.data));
+            await dispatch(updateUserDeck(deckId));
+        }
+        return res;
     }
 }
 
@@ -32,44 +55,17 @@ export const setUserFlashcards = userId => {
     const path = `/api/users/${userId}/flashcards`;
     return async dispatch => {
         const res = await fetch(path);
-
         res.data = await res.json();
-        console.log(res);
         if (res.ok && Object.keys(res.data).length) {
             dispatch(setFlashcards(res.data));
-            dispatch(setActiveFlashcard(Object.values(res.data)[0].id));
         }
 
         return res;
     }
 }
 
-window.setUserFlashcards = setUserFlashcards;
 
-export const addFlashcard = (userId, deckId) => {
-    const csrfToken = Cookies.get('XSRF-TOKEN');
-    return async dispatch => {
-        const res = await fetch('/api/flashcards', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFTOKEN': csrfToken
-            },
-            body: JSON.stringify({ userId, deckId })
-        });
-
-        res.data = await res.json();
-
-        if (res.ok) {
-            dispatch(setFlashcard(res.data));
-            await dispatch(updateUserDeck(deckId));
-            dispatch(setActiveFlashcard(res.data.id));
-        }
-        return res;
-    }
-}
-
-export const updateFlashcard = (flashcardId, title, content) => {
+export const updateUserFlashcard = (question, answer, confidence, flashcardId) => {
     const csrfToken = Cookies.get("XSRF-TOKEN");
     return async dispatch => {
         const res = await fetch(`/api/flashcards/${flashcardId}`, {
@@ -78,13 +74,11 @@ export const updateFlashcard = (flashcardId, title, content) => {
                 "Content-Type": "application/json",
                 "X-CSRFTOKEN": csrfToken
             },
-            body: JSON.stringify({ flashcardId, title, content })
+            body: JSON.stringify({ question, answer, confidence, flashcardId })
         });
-
         res.data = await res.json();
-
         if (res.ok) {
-            dispatch(updateFlashcardItem(res.data));
+            dispatch(updateFlashcard(res.data));
             await dispatch(updateUserDeck(res.data.deckId));
         }
         return res;

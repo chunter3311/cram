@@ -4,13 +4,15 @@ import { toggleCreateDeckModal } from '../store/ui'
 import { useDispatch, useSelector } from 'react-redux';
 import NewDeckModal from './NewDeckModal';
 import DeckRow from './DeckRow';
-
+import EditDeckModal from './EditDeckModal';
 
 function Decks(props) {
 
     const dispatch = useDispatch();
-    const decks = useSelector(state => Object.values(state.entities.decks))
-    const createDeck = useSelector(state => state.ui.createDeck)
+    const decks = useSelector(state => Object.values(state.entities.decks));
+    const createDeck = useSelector(state => state.ui.createDeck);
+    const editDeck = useSelector(state => state.ui.editDeck);
+    const [editDeckId, setEditDeckId] = useState(null);
     
     const [title, setTitle] = useState('');
     const [errors, setErrors] = useState([]);
@@ -27,6 +29,7 @@ function Decks(props) {
     return (
         <main className={styles.decks_container}>
             {createDeck ? <NewDeckModal CreateDeckModal={CreateDeckModal}/> : ""}
+            {editDeck ? <EditDeckModal editDeckId={editDeckId}/> : ""}
             <h1>My Decks</h1>
             <div className={styles.decks_title_bar}>
                 <div className={styles.decks_title}>
@@ -46,10 +49,11 @@ function Decks(props) {
                         <th>STATUS</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     { decks.map((deck, i) => {
                         return (
-                            <DeckRow deck={deck} key={`deck-${i + 1}`}/>
+                            <DeckRow deck={deck} setEditDeckId={setEditDeckId} key={`deck-${i + 1}`}/>
                         )
                     })}
                 </tbody>

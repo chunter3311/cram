@@ -27,7 +27,7 @@ function MainContent({ match }) {
                 // needLogin={this.props.needLogin}
                 component={Deck}
             /> */}
-            <Route path={match.url + "flashcards"} exact component={Flashcards} />
+            <Route path={match.url + "flashcards"} component={Flashcards} />
         </div>
     );
 }

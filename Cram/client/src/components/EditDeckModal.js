@@ -22,6 +22,17 @@ const EditDeckModal = ({ editDeckId }) => {
         }
     }
 
+    const handleDeleteClick = async (event) => {
+        event.stopPropagation();
+        const deckId = editDeckId
+        const res = await dispatch(editUserDecks(title, false, userId, deckId));
+
+        if (res.ok) {
+            togEditDeckModal(event);
+            return;
+        }
+    }
+
     const togEditDeckModal = (e) => {
         e.preventDefault()
         dispatch(toggleEditDeckModal())
@@ -46,6 +57,7 @@ const EditDeckModal = ({ editDeckId }) => {
                         <button style={{outline: "none"}} type="button" onClick={handleClick}>Continue</button>
                     </div>
                 </form>
+                <button style={{outline: "none"}} type="button" onClick={handleDeleteClick}>Delete</button>
             </div>
         </div >
     )

@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { logout } from '../store/session';
 import styles from '../styles/navbar.module.css';
-import { setSelectedDeck } from '../store/session';
-import NewFlashcardButton from './NewFlashcardButton';
+// import { setSelectedDeck } from '../store/session';
 
 
 function Navbar({ history }) {

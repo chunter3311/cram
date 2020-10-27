@@ -8,7 +8,7 @@ import { setUserDecks } from '../store/decks';
 import { setUserTrash } from '../store/trash';
 import { setUserInfo } from '../store/users';
 
-function Home({ userId, selectedDeckId }) {
+function Home({ userId, selectedDeckId, defaultDeckId }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,6 +32,7 @@ function Home({ userId, selectedDeckId }) {
         }
         getUserInfo();
         
+        // dispatch(setSelectedDeck(selectedDeckId || defaultDeckId));
     }, [dispatch, userId, selectedDeckId]);
 
     return (
@@ -48,7 +49,9 @@ const mapStateToProps = (state, ownProps) => {
     return {
         userId: state.session.user_id,
         selectedDeckId: state.session.selectedDeckId,
-        decks: state.entities.decks
+        decks: state.entities.decks,
+        flashcards: state.entities.flashcards
+        // defaultDeckId: state.session.defaultDeckId
     }
 };
 

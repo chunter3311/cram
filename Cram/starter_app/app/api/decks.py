@@ -17,7 +17,6 @@ def edit_deck(deck_id):
     data = request.json
     deck = Deck.query.get(deck_id)
     deck.title = data['title']
-    deck.isMastered = data['isMastered']
     deck.updated_at = datetime.now()
     db.session.commit()
     return deck.to_dict()
