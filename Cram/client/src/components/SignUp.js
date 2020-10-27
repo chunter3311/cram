@@ -54,15 +54,16 @@ const SignUpPage = ({ history }) => {
                     <h1 className="header-title">
                         Cram
                     </h1>
-                    <div className="header-tagline">
+                    {/* <div className="header-tagline">
                         Optimize your study.
-                    </div>
+                    </div> */}
                 </div>
-                <button onClick={demoUserClick} className="demo_button">Continue as Demo User</button>
-                <div className="divider-container">
+                <button onClick={demoUserClick} className="demo_button">Demo</button>
+                {/* <div className="divider-container">
                     <div className="divider-text">or</div>
                     <div className="divider-line"></div>
-                </div>
+                </div> */}
+                <hr />
                 <div className="login_form_container">
 
                     <form onSubmit={submitHandler}>
@@ -80,9 +81,9 @@ const SignUpPage = ({ history }) => {
                     </form>
                 </div>
                 <div className="form-footer">
-                    <div className="footer-tagline">
+                    {/* <div className="footer-tagline">
                         Already have an account?
-                    </div>
+                    </div> */}
                     <div className="footer-cta-wrapper">
                         <Link className="footer-cta" to='/login'>Sign in</Link>
                     </div>

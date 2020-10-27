@@ -62,7 +62,7 @@ const LoginForm = ({ history }) => {
                         Optimize Your Study
                     </div> */}
                 </div>
-                <button onClick={demoUserClick} className="demo_button">Continue as Demo User</button>
+                <button onClick={demoUserClick} className="demo_button">Demo</button>
                 {/* <div className="divider-container">
                     <div className="divider-text">or</div>
                     <div className="divider-line"></div>
