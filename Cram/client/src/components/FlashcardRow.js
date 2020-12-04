@@ -1,7 +1,9 @@
 import React from 'react';
 import { toggleEditFlashcardModal } from '../store/ui';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenAlt } from '@fortawesome/free-solid-svg-icons';
+import styles from '../styles/deck.module.css';
 
 const FlashcardRow = ({ flashcard, setEditFlashcardId }) => {
     const dispatch=useDispatch();
@@ -18,10 +20,7 @@ const FlashcardRow = ({ flashcard, setEditFlashcardId }) => {
                 <td>{flashcard.question}</td>
                 <td>{flashcard.answer}</td>
                 <td>{flashcard.confidence}</td>
-                <td>{flashcard.deckId}</td>
-                <td>
-                    <button onClick={togEditFlashcardModal}>Modify</button>
-                </td>
+                <td className={styles.edit_deck_icon} onClick={togEditFlashcardModal}><FontAwesomeIcon icon={faPenAlt} /></td>
             </tr>
         </>
     );

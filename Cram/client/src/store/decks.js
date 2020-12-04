@@ -65,8 +65,8 @@ export const setUserDecks = id => {
         res.data = await res.json();
         if (res.ok) {
             dispatch(setDecks(res.data));
-            console.log('this')
-            console.log(res.data[1]);
+            // console.log('this')
+            // console.log(res.data[1]);
             if(res.data[1]) {
                 dispatch(setSelectedDeck(res.data[1].id))
             }

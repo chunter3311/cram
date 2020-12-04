@@ -11,20 +11,14 @@ import FlashcardRow from './FlashcardRow';
 function Flashcards() {
 
     const dispatch = useDispatch();
-    // const userId = useSelector(state => state.session.user_id)
     const flashcards = useSelector(state => Object.values(state.entities.flashcards))
-    // const flashcards = useSelector(state => Object.values(state.entities.flashcards).filter((flashcard) => flashcard.deckId === deck.id));
-    // const username = useSelector(state => state.entities.users[userId].username)
     const createFlashcard = useSelector(state => state.ui.createFlashcard)
-    // const editFlashcard = useSelector(state => state.ui.editFlashcard)
-    // const [editFlashcardId, setEditFlashcardId] = useState(null);
-    
-    const [title, setTitle] = useState('');
-    const [errors, setErrors] = useState([]);
+    // const [title, setTitle] = useState('');
+    // const [errors, setErrors] = useState([]);
 
-    useEffect(() => {
-        setErrors([]);
-    }, [title]);
+    // useEffect(() => {
+    //     setErrors([]);
+    // }, [title]);
 
     const CreateFlashcardModal = (e) => {
         e.preventDefault()
@@ -34,7 +28,6 @@ function Flashcards() {
     return (
         <main className={styles.decks_container}>
             {createFlashcard ? <NewFlashcardModal CreateFlashcardModal={CreateFlashcardModal}/> : ""}
-            {/* {editFlashcard ? <EditFlashcardModal editFlashcardId={editFlashcardId}/> : ""} */}
             <h1>Flashcards</h1>
             <div className={styles.decks_title_bar}>
                 <div className={styles.decks_title}>
@@ -58,7 +51,6 @@ function Flashcards() {
                     </tr>
                     { flashcards.map((flashcard, i) => {
                         return (
-                            // <FlashcardRow flashcard={flashcard} setEditFlashcardId={setEditFlashcardId} key={`flashcard-${i + 1}`}/>
                             <FlashcardRow flashcard={flashcard} key={`flashcard-${i + 1}`}/>
                         )
                     })}
