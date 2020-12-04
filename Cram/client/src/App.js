@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import UserList from './components/UsersList';
 import SignUpPage from './components/SignUp'
 import LoginForm from './components/LoginForm';
 import AuthRoute from './components/AuthRoute';
@@ -25,9 +24,6 @@ function App() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path="/users">
-                    <UserList />
-                </Route>
                 <Route exact path="/login">
                     <LoginForm />
                 </Route>

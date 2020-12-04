@@ -31,15 +31,17 @@ npm start
 
 ### Pushing your container
 
-1. Login to heroku: `$ heroku login`
-2. Login to the heroku container registry: `$ heroku container:login`
+1. Login to heroku: `heroku login`
+2. Login to the heroku container registry: `heroku container:login`
 3. CD into `starter_app`
+cd \\wsl$\Ubuntu\home\cole\aa\projects\Cram\Cram\starter_app
 3. Remove Previous Image `docker image rm cram_build`
 4. Create Image to Push to Heroku `docker build -t cram_build .`
 5. Push Image to Heroku Docker Repo `docker tag cram_build registry.heroku.com/cram-flashcards/web`
 6. Run Container from Heroku Docker Repo `docker push registry.heroku.com/cram-flashcards/web`
 7. Release your docker container to heroku: `heroku container:push web -a cram-flashcards`
 8. Seed your database: `heroku run -a cram-flashcards python -m database`
+heroku container:release web release
 7. Profit.
 
 

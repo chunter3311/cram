@@ -30,7 +30,7 @@ export const setUserTrash = (userId) => {
         const res = await fetch(`/api/users/${userId}/trash`);
 
         res.data = await res.json();
-        console.log(res);
+        // console.log(res);
         if (res.ok) {
             dispatch(setTrash(res.data.trash));
         }

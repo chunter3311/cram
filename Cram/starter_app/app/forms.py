@@ -16,3 +16,10 @@ class DeckForm(FlaskForm):
     title = StringField("Title", validators=[InputRequired("Deck names must be at least one character long")])
     isMastered = BooleanField("isMastered")
     userId = IntegerField("UserId")
+
+class FlashcardForm(FlaskForm):
+    question = StringField("Question", validators=[InputRequired("Flashcard questions must be at least one character long")])
+    answer = StringField("Answer", validators=[InputRequired("Flashcard answers must be at least one character long")])
+    confidence = IntegerField("Confidence")
+    deckId = IntegerField("DeckId")
+    userId = IntegerField("UserId")
