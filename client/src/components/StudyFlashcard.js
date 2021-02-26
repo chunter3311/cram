@@ -38,7 +38,6 @@ const StudyFlashcard = ({ flashcard, index, lastIndex }) => {
         <div onClick={revealAnswer} id={`flashcard-${index}`} className={`${styles.study_deck_modal_container} ${styles.hide}`}>
             <div className={styles.study_deck_modal_wrapper}>
                 <h3 className={styles.study_deck_modal_question}>{question}</h3>
-                {/* <button className={styles.study_deck_modal_reveal_button} id={`reveal-answer-${flashcard.id}`} onClick={revealAnswer}>Reveal Answer</button> */}
                 <div id={`answer-${flashcard.id}`} className={`${styles.study_deck_modal_answer_wrapper} ${styles.hide}`}>
                     <h3 className={styles.study_deck_modal_answer}>{answer}</h3>
                     <div className={styles.confidence_wrapper}>
